@@ -1,3 +1,4 @@
+<h1 style="text-align: center;">Let's Do Quora Sticky Footers with infinite scroll</h1>
 <div style="text-align: center;margin: 0 auto;width: 70%;border:2px solid #ccc;min-height: 500px"  (scroll)="onScroll($event)">
 	
 	<div class="eachSection" *ngFor="let i of allData;let z=index" id="extraSection{{z+1}}">
@@ -9,7 +10,7 @@
 			{{i.extraData}}
 		</div>
 		<div id="extraSection{{z+1}}Sticky" style="border: 1px solid black;background: pink;padding:20px 10px;bottom:0;width: 100%">
-			Section one Upvote
+			Section {{z+1}} Upvote and Comment
 		</div>
 
 </div>

@@ -9,7 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "deploy":"ng build –prod –aot –base-href='https://github.com/wickedrahul/stickyFooter/' angular-cli-ghpages"
+    "deploy":"ng build –-prod -–base-href https://wickedrahul.github.io/stickyFooter/"
   },
   "dependencies": {
     "@angular/animations": "^4.0.0",
