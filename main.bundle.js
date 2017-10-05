@@ -694,7 +694,10 @@ var StickyFooterComponent = (function () {
         //  console.log(params);
     };
     StickyFooterComponent.prototype.fetchMoreItems = function () {
-        console.log('fecthed');
+        this.allData.push({
+            data: 'loaded 1',
+            extraData: 'Extra'
+        });
     };
     StickyFooterComponent.prototype.showExtraTrue = function (param) {
         if (this.showExtra[param] === true) {
