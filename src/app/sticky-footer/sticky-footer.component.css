@@ -1,0 +1,13 @@
+.eachSection{
+	min-height: 200px;
+	text-align: left;
+	padding: 15px;
+	border-bottom: 2px solid #ccc
+}
+a:hover{
+	cursor: pointer;
+}
+
+.eachSection{
+	position: relative;
+}
