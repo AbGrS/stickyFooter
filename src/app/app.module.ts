@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { StickyFooterComponent } from './sticky-footer/sticky-footer.component';
+import {AppServiceService} from './service/app-service.service';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import { StickyFooterComponent } from './sticky-footer/sticky-footer.component';
       }
     ])
   ],
-  providers: [],
+  providers: [AppServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,8 +1,7 @@
 import { Component, OnInit, HostListener, Inject} from '@angular/core';
 import { DOCUMENT } from '@angular/platform-browser';
 
-
-
+import { AppServiceService } from '../service/app-service.service';
 
 @Component({
   selector: 'app-sticky-footer',
@@ -17,23 +16,28 @@ expandedStickyHeaderId;
 fixedOffset={};
 liOfExpandedIds=[];
 topPositions={};
- constructor(@Inject(DOCUMENT) private document: Document) { }
+
+allData
+ constructor(@Inject(DOCUMENT) private document: Document,
+ private appService: AppServiceService) { }
 
   ngOnInit() {
-  	 //window.addEventListener('scroll', this.onScroll, true); //third parameter
-  	 	var el1= document.getElementById('extraSection1');
-  		this.topPositions['extraSection1']= el1.getBoundingClientRect()['y'];
 
-  		var el1= document.getElementById('extraSection2');
-  		this.topPositions['extraSection1']= el1.getBoundingClientRect()['y'];
+  	this.allData= this.appService.allData;
+  	 //window.addEventListener('scroll', this.onScroll, true); //third parameter
+  	 // 	var el1= document.getElementById('extraSection1');
+  		// this.topPositions['extraSection1']= el1.getBoundingClientRect()['y'];
+
+  		// var el1= document.getElementById('extraSection2');
+  		// this.topPositions['extraSection1']= el1.getBoundingClientRect()['y'];
   }
   showMore(elementId){
   	this.showExtra[elementId]= true;
   	//this.expandedStickyHeaderId= elementId;
   	this.liOfExpandedIds.push(elementId);
 
-  	var el1= document.getElementById(elementId);
-  	this.topPositions[elementId]= el1.getBoundingClientRect()['y'];
+  	// var el1= document.getElementById(elementId);
+  	// this.topPositions[elementId]= el1.getBoundingClientRect()['y'];
   }
  @HostListener("window:scroll", [])
 
@@ -44,26 +48,38 @@ topPositions={};
   			var el= document.getElementById(item);
   			var params= el.getBoundingClientRect();
 
+  			var elSticky= document.getElementById(item+'Sticky');
 
-  			if((params['top']-(window.innerHeight+window.scrollY))>10){
-  				console.log(item +' - '+ params['top'])
-  				console.log(window.scrollY)
-  				console.log(window.innerHeight)
-  				el.style.position= 'fixed';
-  				el.style.width= '67%';
-  				el.style.zIndex='1'
+  			if(params['top']< window.innerHeight/2 && params['bottom']>window.innerHeight){
+  				elSticky.style.position='fixed';
+  				elSticky.style.width="67%";
+
   			}else{
-  				console.log(item+' -'+params['top'])
-  				console.log(window.scrollY)
-  				console.log(window.innerHeight )
-  				el.style.position= 'static';
-  				el.style.width= '100%';
+  				elSticky.style.position='static';
+  				elSticky.style.width="100%";
   			}
+  			// if(this.topPositions['extraSection1']){
+  			// 	console.log(item +' - '+ params['top'])
+  			// 	console.log(window.scrollY)
+  			// 	console.log(window.innerHeight)
+  			// 	el.style.position= 'fixed';
+  			// 	el.style.width= '67%';
+  			// 	el.style.zIndex='1'
+  			// }else{
+  			// 	console.log(item+' -'+params['top'])
+  			// 	console.log(window.scrollY)
+  			// 	console.log(window.innerHeight )
+  			// 	el.style.position= 'static';
+  			// 	el.style.width= '100%';
+  			// }
   		})
 
-  		this.fetchMoreItems();
+  		
+  		
   	}
-
+		if((document.documentElement.scrollTop+ window.innerHeight)> (document.body.clientHeight)-100){
+  			this.fetchMoreItems();
+  		}
   
   // 	this.expandedStickyHeaderId= Math.min()
   // 	let number = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
@@ -91,6 +107,14 @@ topPositions={};
   }
 
 	fetchMoreItems(){
-		
+			console.log('fecthed');
+  	}
+
+  	showExtraTrue(param){
+  		if(this.showExtra[param]===true){
+  			return true;
+  		}else{
+  			return false;
+  		}
   	}
 }
